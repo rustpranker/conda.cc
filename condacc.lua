@@ -1,21 +1,3 @@
-[file name]: изображение.png
-[file content begin]
-# Смотреть Подписки Рекомендации
-
-## Вдрузьях у  
-**molitva**  
-@pastinoccence #madhood #robiox  
-
----
-
-### Подписаться
-
-- Главная Интересное
-- Входящие Профиль
-
-
-[file content end]
-
 -- CONDA.CC - Universal Script for Solara
 if _G.CondaCC then return end
 _G.CondaCC = true
@@ -1507,3 +1489,4 @@ spawn(function()
         end
     end
 end)
+
