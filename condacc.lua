@@ -758,7 +758,7 @@ local function RemoveJumpBoost()
     end
 end
 
--- ESP SYSTEM (ПЕРЕРАБОТАННАЯ - ТОЧЬ В ТОЧЬ КАК НА ФОТО)
+-- ESP SYSTEM (ТОЧЬ В ТОЧЬ КАК НА ФОТО)
 function CreateESP(targetPlayer)
     if not targetPlayer.Character then return end
     
@@ -802,36 +802,36 @@ function CreateESP(targetPlayer)
         esp.Username.Parent = targetPlayer.Character.Head
     end
     
-    -- Healthbar (ТОЧЬ В ТОЧЬ КАК НА ФОТО)
-    esp.Healthbar = Instance.new("BillboardGui")
-    esp.Healthbar.Name = "HealthbarESP"
-    esp.Healthbar.Size = UDim2.new(0, 60, 0, 6) -- Широкая полоска как на фото
-    esp.Healthbar.StudsOffset = Vector3.new(0, 3.2, 0) -- Позиция над юзернеймом
-    esp.Healthbar.AlwaysOnTop = true
-    esp.Healthbar.Enabled = Settings.ESP.Healthbar
-    
-    local HealthbarBackground = Instance.new("Frame")
-    HealthbarBackground.Parent = esp.Healthbar
-    HealthbarBackground.Size = UDim2.new(1, 0, 1, 0)
-    HealthbarBackground.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
-    HealthbarBackground.BorderSizePixel = 1
-    HealthbarBackground.BorderColor3 = Color3.new(1, 1, 1)
-    HealthbarBackground.BackgroundTransparency = 0.3
-    
-    local HealthbarFill = Instance.new("Frame")
-    HealthbarFill.Parent = HealthbarBackground
-    HealthbarFill.Size = UDim2.new(1, 0, 1, 0) -- Полная ширина
-    HealthbarFill.BackgroundColor3 = Color3.new(0, 1, 0)
-    HealthbarFill.BorderSizePixel = 0
-    HealthbarFill.AnchorPoint = Vector2.new(0, 0)
-    HealthbarFill.Position = UDim2.new(0, 0, 0, 0)
-    
-    esp.HealthbarFill = HealthbarFill
-    
-    if targetPlayer.Character:FindFirstChild("Head") then
-        esp.Healthbar.Adornee = targetPlayer.Character.Head
-        esp.Healthbar.Parent = targetPlayer.Character.Head
-    end
+    -- Healthbar (ТОЧЬ В ТОЧЬ КАК НА ФОТО - ТОНКАЯ И ДЛИННАЯ СЛЕВА)
+esp.Healthbar = Instance.new("BillboardGui")
+esp.Healthbar.Name = "HealthbarESP"
+esp.Healthbar.Size = UDim2.new(0, 4, 0, 100) -- Тонкая и высокая полоска
+esp.Healthbar.StudsOffset = Vector3.new(-2.5, 0, 0) -- Слева от игрока
+esp.Healthbar.AlwaysOnTop = true
+esp.Healthbar.Enabled = Settings.ESP.Healthbar
+
+local HealthbarBackground = Instance.new("Frame")
+HealthbarBackground.Parent = esp.Healthbar
+HealthbarBackground.Size = UDim2.new(1, 0, 1, 0)
+HealthbarBackground.BackgroundColor3 = Color3.new(0.05, 0.05, 0.05) -- Темный фон
+HealthbarBackground.BorderSizePixel = 1
+HealthbarBackground.BorderColor3 = Color3.new(0.2, 0.2, 0.2) -- Темная рамка
+HealthbarBackground.BackgroundTransparency = 0.2
+
+local HealthbarFill = Instance.new("Frame")
+HealthbarFill.Parent = HealthbarBackground
+HealthbarFill.Size = UDim2.new(1, 0, 1, 0) -- Полная высота
+HealthbarFill.BackgroundColor3 = Color3.new(0, 0.4, 0) -- Темно-зеленый
+HealthbarFill.BorderSizePixel = 0
+HealthbarFill.AnchorPoint = Vector2.new(0, 1) -- Якорь внизу
+HealthbarFill.Position = UDim2.new(0, 0, 1, 0) -- Начинается снизу
+
+esp.HealthbarFill = HealthbarFill
+
+if targetPlayer.Character:FindFirstChild("Head") then
+    esp.Healthbar.Adornee = targetPlayer.Character.Head
+    esp.Healthbar.Parent = targetPlayer.Character.Head
+end
     
     -- Glow
     esp.Glow = Instance.new("Highlight")
@@ -866,16 +866,16 @@ function UpdateHealthbar(player)
     local maxHealth = humanoid.MaxHealth
     local healthPercent = health / maxHealth
     
-    -- Обновляем ширину полоски здоровья (не высоту)
-    esp.HealthbarFill.Size = UDim2.new(healthPercent, 0, 1, 0)
+    -- Обновляем высоту полоски здоровья (теперь она вертикальная)
+    esp.HealthbarFill.Size = UDim2.new(1, 0, healthPercent, 0)
     
-    -- Изменяем цвет в зависимости от здоровья (как на фото)
+    -- Изменяем цвет в зависимости от здоровья (темные цвета как на фото)
     if healthPercent > 0.7 then
-        esp.HealthbarFill.BackgroundColor3 = Color3.new(0, 1, 0) -- Зеленый
+        esp.HealthbarFill.BackgroundColor3 = Color3.new(0, 0.4, 0) -- Темно-зеленый
     elseif healthPercent > 0.3 then
-        esp.HealthbarFill.BackgroundColor3 = Color3.new(1, 1, 0) -- Желтый
+        esp.HealthbarFill.BackgroundColor3 = Color3.new(0.4, 0.4, 0) -- Темно-желтый
     else
-        esp.HealthbarFill.BackgroundColor3 = Color3.new(1, 0, 0) -- Красный
+        esp.HealthbarFill.BackgroundColor3 = Color3.new(0.4, 0, 0) -- Темно-красный
     end
 end
 
@@ -1489,4 +1489,3 @@ spawn(function()
         end
     end
 end)
-
