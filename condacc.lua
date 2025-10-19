@@ -1355,49 +1355,11 @@ local function createReadmeTab()
     local readmeFrame = tabFrames["README"]
     
     local ReadmeText = [[
-CONDA.CC - Universal Script
-
-ESP FEATURES:
-• Hitbox - Shows damage hitbox rectangle
-• Username - Shows player username above head  
-• Healthbar - Shows health bar with color changing
-• Glow - Adds glow effect to players
-
-RAGE FEATURES:
-• Camera Lock - Advanced camera lock with prediction
-• FOV Circle - Visual aiming circle
-• Customizable keybinds
-
-MACRO FEATURES:
-• Speed Boost - Adjustable speed (16-150) with keybind
-• Fly - Flight system with speed control
-• Jump Boost - Enhanced jumping (50-200)
-
-CONTROLS:
-• DEL - Toggle UI visibility
-• Custom keybinds for Camera Lock, Speed, Fly
-• Disable key to turn off aimlock
-
-USAGE:
-1. Enable features in respective tabs
-2. Set keybinds in RAGE and MACRO tabs
-3. Adjust sliders for customization
-4. Use keybinds for quick toggling
-
-NOTES:
-• Works in ALL Roblox games
-• ESP applies to ALL players instantly
-• All changes take effect immediately
-• Camera Lock now stable and reliable
-
-Created for legit gameplay
-Not for HvH!
+CONDA.CC - mad hood , da hood , boom hood and for other games script.
 
 Contacts:
-Discord: jwke
+Discord: youpranked
 Roblox: dgdhdhdqoqpwjd
-
-CONDA.CC - Universal Script
 ]]
     
     local ReadmeLabel = Instance.new("TextLabel")
@@ -1489,3 +1451,4 @@ spawn(function()
         end
     end
 end)
+
