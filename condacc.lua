@@ -1,3 +1,21 @@
+[file name]: изображение.png
+[file content begin]
+# Смотреть Подписки Рекомендации
+
+## Вдрузьях у  
+**molitva**  
+@pastinoccence #madhood #robiox  
+
+---
+
+### Подписаться
+
+- Главная Интересное
+- Входящие Профиль
+
+
+[file content end]
+
 -- CONDA.CC - Universal Script for Solara
 if _G.CondaCC then return end
 _G.CondaCC = true
@@ -758,7 +776,7 @@ local function RemoveJumpBoost()
     end
 end
 
--- ESP SYSTEM
+-- ESP SYSTEM (ПЕРЕРАБОТАННАЯ - ТОЧЬ В ТОЧЬ КАК НА ФОТО)
 function CreateESP(targetPlayer)
     if not targetPlayer.Character then return end
     
@@ -778,11 +796,11 @@ function CreateESP(targetPlayer)
         esp.Hitbox.Parent = targetPlayer.Character.HumanoidRootPart
     end
     
-    -- Username
+    -- Username (ТОЧЬ В ТОЧЬ КАК НА ФОТО)
     esp.Username = Instance.new("BillboardGui")
     esp.Username.Name = "UsernameESP"
-    esp.Username.Size = UDim2.new(0, 200, 0, 50)
-    esp.Username.StudsOffset = Vector3.new(0, 3, 0)
+    esp.Username.Size = UDim2.new(0, 200, 0, 30)
+    esp.Username.StudsOffset = Vector3.new(0, 2.5, 0) -- Снизу игрока
     esp.Username.AlwaysOnTop = true
     esp.Username.Enabled = Settings.ESP.Username
     
@@ -793,35 +811,38 @@ function CreateESP(targetPlayer)
     UsernameLabel.Text = targetPlayer.Name
     UsernameLabel.TextColor3 = Settings.ESP.Color
     UsernameLabel.TextSize = 14
-    UsernameLabel.Font = Enum.Font.GothamBold
+    UsernameLabel.Font = Enum.Font.SourceSansBold -- Шрифт как на фото
+    UsernameLabel.TextStrokeTransparency = 0.5
+    UsernameLabel.TextStrokeColor3 = Color3.new(0, 0, 0)
     
     if targetPlayer.Character:FindFirstChild("Head") then
         esp.Username.Adornee = targetPlayer.Character.Head
         esp.Username.Parent = targetPlayer.Character.Head
     end
     
-    -- Healthbar
+    -- Healthbar (ТОЧЬ В ТОЧЬ КАК НА ФОТО)
     esp.Healthbar = Instance.new("BillboardGui")
     esp.Healthbar.Name = "HealthbarESP"
-    esp.Healthbar.Size = UDim2.new(0, 6, 0, 50)
-    esp.Healthbar.StudsOffset = Vector3.new(-2.5, 0, 0)
+    esp.Healthbar.Size = UDim2.new(0, 60, 0, 6) -- Широкая полоска как на фото
+    esp.Healthbar.StudsOffset = Vector3.new(0, 3.2, 0) -- Позиция над юзернеймом
     esp.Healthbar.AlwaysOnTop = true
     esp.Healthbar.Enabled = Settings.ESP.Healthbar
     
     local HealthbarBackground = Instance.new("Frame")
     HealthbarBackground.Parent = esp.Healthbar
     HealthbarBackground.Size = UDim2.new(1, 0, 1, 0)
-    HealthbarBackground.BackgroundColor3 = Color3.new(0, 0, 0)
+    HealthbarBackground.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
     HealthbarBackground.BorderSizePixel = 1
     HealthbarBackground.BorderColor3 = Color3.new(1, 1, 1)
+    HealthbarBackground.BackgroundTransparency = 0.3
     
     local HealthbarFill = Instance.new("Frame")
     HealthbarFill.Parent = HealthbarBackground
-    HealthbarFill.Size = UDim2.new(1, 0, 1, 0)
+    HealthbarFill.Size = UDim2.new(1, 0, 1, 0) -- Полная ширина
     HealthbarFill.BackgroundColor3 = Color3.new(0, 1, 0)
     HealthbarFill.BorderSizePixel = 0
-    HealthbarFill.AnchorPoint = Vector2.new(0, 1)
-    HealthbarFill.Position = UDim2.new(0, 0, 1, 0)
+    HealthbarFill.AnchorPoint = Vector2.new(0, 0)
+    HealthbarFill.Position = UDim2.new(0, 0, 0, 0)
     
     esp.HealthbarFill = HealthbarFill
     
@@ -863,15 +884,16 @@ function UpdateHealthbar(player)
     local maxHealth = humanoid.MaxHealth
     local healthPercent = health / maxHealth
     
-    esp.HealthbarFill.Size = UDim2.new(1, 0, healthPercent, 0)
+    -- Обновляем ширину полоски здоровья (не высоту)
+    esp.HealthbarFill.Size = UDim2.new(healthPercent, 0, 1, 0)
     
-    -- Change color based on health
-    if healthPercent > 0.5 then
-        esp.HealthbarFill.BackgroundColor3 = Color3.new(0, 1, 0) -- Green
-    elseif healthPercent > 0.2 then
-        esp.HealthbarFill.BackgroundColor3 = Color3.new(1, 1, 0) -- Yellow
+    -- Изменяем цвет в зависимости от здоровья (как на фото)
+    if healthPercent > 0.7 then
+        esp.HealthbarFill.BackgroundColor3 = Color3.new(0, 1, 0) -- Зеленый
+    elseif healthPercent > 0.3 then
+        esp.HealthbarFill.BackgroundColor3 = Color3.new(1, 1, 0) -- Желтый
     else
-        esp.HealthbarFill.BackgroundColor3 = Color3.new(1, 0, 0) -- Red
+        esp.HealthbarFill.BackgroundColor3 = Color3.new(1, 0, 0) -- Красный
     end
 end
 
