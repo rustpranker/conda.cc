@@ -31,7 +31,16 @@ local Settings = {
         DisableKey = Enum.KeyCode.P,
         AimPart = "HumanoidRootPart",
         Prediction = 0.15038,
-        AimlockState = true
+        AimlockState = true,
+        
+        -- НОВЫЕ НАСТРОЙКИ ХИТБОКС ЭКСПАНДЕРА
+        HitboxExpander = {
+            Enabled = false,
+            HeadSize = 50,
+            Visible = true,
+            Color = Color3.fromRGB(255, 0, 0),
+            Transparency = 0.7
+        }
     },
     Macro = {
         SpeedEnabled = false,
@@ -71,6 +80,42 @@ fov.Transparency = 1
 fov.Thickness = 1
 fov.Color = Color3.fromRGB(255, 255, 0)
 fov.NumSides = 1000
+
+-- Функция обновления хитбоксов
+function UpdateHitboxes()
+    if Settings.Rage.HitboxExpander.Enabled then
+        for i, v in next, Players:GetPlayers() do
+            if v.Name ~= player.Name and v.Character then
+                pcall(function()
+                    local root = v.Character:FindFirstChild("HumanoidRootPart")
+                    if root then
+                        root.Size = Vector3.new(Settings.Rage.HitboxExpander.HeadSize, Settings.Rage.HitboxExpander.HeadSize, Settings.Rage.HitboxExpander.HeadSize)
+                        root.Transparency = Settings.Rage.HitboxExpander.Visible and Settings.Rage.HitboxExpander.Transparency or 1
+                        root.BrickColor = BrickColor.new(Settings.Rage.HitboxExpander.Color)
+                        root.Material = "Neon"
+                        root.CanCollide = false
+                    end
+                end)
+            end
+        end
+    else
+        -- Восстанавливаем оригинальные размеры когда выключено
+        for i, v in next, Players:GetPlayers() do
+            if v.Name ~= player.Name and v.Character then
+                pcall(function()
+                    local root = v.Character:FindFirstChild("HumanoidRootPart")
+                    if root then
+                        root.Size = Vector3.new(2, 2, 1)
+                        root.Transparency = 0
+                        root.BrickColor = BrickColor.new("Medium stone grey")
+                        root.Material = "Plastic"
+                        root.CanCollide = true
+                    end
+                end)
+            end
+        end
+    end
+end
 
 function update()
     if fov then
@@ -1024,6 +1069,11 @@ RunService.RenderStepped:Connect(function()
     end
 end)
 
+-- Основной цикл обновления хитбоксов
+RunService.RenderStepped:Connect(function()
+    UpdateHitboxes()
+end)
+
 -- Player connection handling
 Players.PlayerAdded:Connect(function(newPlayer)
     if newPlayer ~= player then
@@ -1186,6 +1236,55 @@ local function createRageTab()
     createSlider(rageFrame, "Prediction", Settings.Rage.Prediction, 0.1, 2.0, function(value)
         Settings.Rage.Prediction = value
     end)
+    
+    -- НОВЫЙ РАЗДЕЛ: HITBOX EXPANDER
+    local HitboxExpanderLabel = Instance.new("TextLabel")
+    HitboxExpanderLabel.Size = UDim2.new(1, -20, 0, 20)
+    HitboxExpanderLabel.BackgroundTransparency = 1
+    HitboxExpanderLabel.Text = "HITBOX EXPANDER"
+    HitboxExpanderLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    HitboxExpanderLabel.TextSize = 16
+    HitboxExpanderLabel.Font = Enum.Font.GothamBold
+    HitboxExpanderLabel.TextXAlignment = Enum.TextXAlignment.Left
+    HitboxExpanderLabel.Parent = rageFrame
+    
+    -- Включение/выключение хитбокс экспандера
+    createToggle(rageFrame, "Hitbox Expander", Settings.Rage.HitboxExpander.Enabled, function(value)
+        Settings.Rage.HitboxExpander.Enabled = value
+        UpdateHitboxes()
+        Notify("Hitbox Expander: " .. (value and "ON" or "OFF"))
+    end)
+    
+    -- Видимость хитбоксов
+    createToggle(rageFrame, "Show Hitboxes", Settings.Rage.HitboxExpander.Visible, function(value)
+        Settings.Rage.HitboxExpander.Visible = value
+        UpdateHitboxes()
+        Notify("Hitboxes: " .. (value and "VISIBLE" or "INVISIBLE"))
+    end)
+    
+    -- Размер хитбоксов
+    createSlider(rageFrame, "Hitbox Size", Settings.Rage.HitboxExpander.HeadSize, 10, 200, function(value)
+        Settings.Rage.HitboxExpander.HeadSize = value
+        UpdateHitboxes()
+    end)
+    
+    -- Прозрачность хитбоксов
+    createSlider(rageFrame, "Hitbox Transparency", Settings.Rage.HitboxExpander.Transparency * 100, 0, 100, function(value)
+        Settings.Rage.HitboxExpander.Transparency = value / 100
+        UpdateHitboxes()
+    end)
+    
+    -- Цвет хитбоксов
+    createColorPicker(rageFrame, "Hitbox Color", Settings.Rage.HitboxExpander.Color, function(color)
+        Settings.Rage.HitboxExpander.Color = color
+        UpdateHitboxes()
+    end)
+    
+    -- Кнопка обновления хитбоксов
+    createButton(rageFrame, "Update All Hitboxes", function()
+        UpdateHitboxes()
+        Notify("Hitboxes updated for all players!")
+    end)
 end
 
 local function createMacroTab()
@@ -1284,7 +1383,16 @@ local function createMiscTab()
                 DisableKey = Enum.KeyCode.P,
                 AimPart = "HumanoidRootPart",
                 Prediction = 0.15038,
-                AimlockState = true
+                AimlockState = true,
+                
+                -- НОВЫЕ НАСТРОЙКИ ХИТБОКС ЭКСПАНДЕРА
+                HitboxExpander = {
+                    Enabled = false,
+                    HeadSize = 50,
+                    Visible = true,
+                    Color = Color3.fromRGB(255, 0, 0),
+                    Transparency = 0.7
+                }
             },
             Macro = {
                 SpeedEnabled = false,
@@ -1307,6 +1415,7 @@ local function createMiscTab()
         }
         UpdateUIColors()
         UpdateAllESP()
+        UpdateHitboxes()
         DeactivateSpeedBoost()
         RemoveJumpBoost()
         StopFlying()
@@ -1355,11 +1464,57 @@ local function createReadmeTab()
     local readmeFrame = tabFrames["README"]
     
     local ReadmeText = [[
-CONDA.CC - mad hood , da hood , boom hood and for other games script.
+CONDA.CC - Universal Script
+
+ESP FEATURES:
+• Hitbox - Shows damage hitbox rectangle
+• Username - Shows player username above head  
+• Healthbar - Shows health bar with color changing
+• Glow - Adds glow effect to players
+
+RAGE FEATURES:
+• Camera Lock - Advanced camera lock with prediction
+• FOV Circle - Visual aiming circle
+• Hitbox Expander - Expand hitboxes for easy hits
+• Customizable keybinds
+
+HITBOX EXPANDER:
+• Expand hitboxes up to 200 size
+• Toggle visibility on/off
+• Change colors like ESP
+• Adjust transparency
+• Works on all players
+
+MACRO FEATURES:
+• Speed Boost - Adjustable speed (16-150) with keybind
+• Fly - Flight system with speed control
+• Jump Boost - Enhanced jumping (50-200)
+
+CONTROLS:
+• DEL - Toggle UI visibility
+• Custom keybinds for Camera Lock, Speed, Fly
+• Disable key to turn off aimlock
+
+USAGE:
+1. Enable features in respective tabs
+2. Set keybinds in RAGE and MACRO tabs
+3. Adjust sliders for customization
+4. Use keybinds for quick toggling
+
+NOTES:
+• Works in ALL Roblox games
+• ESP applies to ALL players instantly
+• All changes take effect immediately
+• Camera Lock now stable and reliable
+
+Created for legit gameplay
+Not for HvH!
 
 Contacts:
-Discord: youpranked
+Discord: jwke
 Roblox: dgdhdhdqoqpwjd
+
+CONDA.CC - Universal Script
 ]]
     
     local ReadmeLabel = Instance.new("TextLabel")
@@ -1451,4 +1606,3 @@ spawn(function()
         end
     end
 end)
-
