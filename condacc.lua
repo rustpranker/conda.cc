@@ -1,4 +1,4 @@
--- CONDA.CC - Universal Script for Solara
+-- CONDA.CC - Universal Script for Solara (SKEET STYLE - ORIGINAL STRUCTURE)
 if _G.CondaCC then return end
 _G.CondaCC = true
 
@@ -20,7 +20,7 @@ local Settings = {
         Username = false,
         Healthbar = false,
         Glow = false,
-        Color = Color3.fromRGB(0, 100, 255)
+        Color = Color3.fromRGB(0, 150, 255)
     },
     Rage = {
         SilentAim = false,
@@ -33,7 +33,6 @@ local Settings = {
         Prediction = 0.15038,
         AimlockState = true,
         
-        -- НОВЫЕ НАСТРОЙКИ ХИТБОКС ЭКСПАНДЕРА
         HitboxExpander = {
             Enabled = false,
             HeadSize = 50,
@@ -58,14 +57,14 @@ local Settings = {
         OriginalJump = 50
     },
     UI = {
-        Color = Color3.fromRGB(0, 100, 255)
+        Color = Color3.fromRGB(0, 150, 255)
     }
 }
 
 -- ESP Storage
 local ESPObjects = {}
 
--- SPOILEDROTTEN CAMERA LOCK SYSTEM (СТАБИЛЬНАЯ ВЕРСИЯ)
+-- SPOILEDROTTEN CAMERA LOCK SYSTEM
 local Camera = workspace.CurrentCamera
 local GetGuiInset = GS.GetGuiInset
 
@@ -78,10 +77,9 @@ local fov = Drawing.new("Circle")
 fov.Filled = false
 fov.Transparency = 1
 fov.Thickness = 1
-fov.Color = Color3.fromRGB(255, 255, 0)
+fov.Color = Color3.fromRGB(0, 150, 255)
 fov.NumSides = 1000
 
--- Функция обновления хитбоксов
 function UpdateHitboxes()
     if Settings.Rage.HitboxExpander.Enabled then
         for i, v in next, Players:GetPlayers() do
@@ -99,7 +97,6 @@ function UpdateHitboxes()
             end
         end
     else
-        -- Восстанавливаем оригинальные размеры когда выключено
         for i, v in next, Players:GetPlayers() do
             if v.Name ~= player.Name and v.Character then
                 pcall(function()
@@ -159,73 +156,76 @@ function Notify(message)
     })
 end
 
--- Create main GUI
+-- ============================================
+-- GUI - ORIGINAL STRUCTURE, SKEET COLORS
+-- ============================================
+
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "CondaCCUI"
 ScreenGui.Parent = CoreGui
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
--- Main frame
+-- Main frame (SKEET STYLE - dark)
 local MainFrame = Instance.new("Frame")
 MainFrame.Name = "MainFrame"
 MainFrame.Parent = ScreenGui
-MainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 35)
-MainFrame.BorderSizePixel = 0
+MainFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)  -- Тёмный
+MainFrame.BorderSizePixel = 1
+MainFrame.BorderColor3 = Color3.fromRGB(40, 40, 40)      -- Тонкая рамка
 MainFrame.Position = UDim2.new(0.3, 0, 0.3, 0)
 MainFrame.Size = UDim2.new(0, 500, 0, 400)
 
--- Rounded corners
 local UICorner = Instance.new("UICorner")
-UICorner.CornerRadius = UDim.new(0, 12)
+UICorner.CornerRadius = UDim.new(0, 4)  -- Скругление
 UICorner.Parent = MainFrame
 
--- Header with logo
+-- Header (SKEET STYLE)
 local Header = Instance.new("Frame")
 Header.Name = "Header"
 Header.Parent = MainFrame
-Header.BackgroundColor3 = Color3.fromRGB(25, 25, 30)
+Header.BackgroundColor3 = Color3.fromRGB(20, 20, 20)  -- Тёмный
 Header.BorderSizePixel = 0
 Header.Position = UDim2.new(0, 0, 0, 0)
-Header.Size = UDim2.new(1, 0, 0, 50)
+Header.Size = UDim2.new(1, 0, 0, 35)
 
 local HeaderCorner = Instance.new("UICorner")
-HeaderCorner.CornerRadius = UDim.new(0, 12)
+HeaderCorner.CornerRadius = UDim.new(0, 4)
 HeaderCorner.Parent = Header
 
--- Title
+-- Title (SKEET STYLE - акцентный цвет)
 local Title = Instance.new("TextLabel")
 Title.Name = "Title"
 Title.Parent = Header
 Title.BackgroundTransparency = 1
-Title.Position = UDim2.new(0, 20, 0, 0)
+Title.Position = UDim2.new(0, 12, 0, 0)
 Title.Size = UDim2.new(1, -20, 1, 0)
 Title.Font = Enum.Font.GothamBold
 Title.Text = "CONDA.CC"
 Title.TextColor3 = Settings.UI.Color
-Title.TextSize = 24
+Title.TextSize = 20
 Title.TextStrokeTransparency = 0.7
 Title.TextXAlignment = Enum.TextXAlignment.Left
 
--- Tabs container
+-- Tabs container (ORIGINAL - слева, но цвета скеет)
 local TabsContainer = Instance.new("Frame")
 TabsContainer.Name = "TabsContainer"
 TabsContainer.Parent = MainFrame
 TabsContainer.BackgroundTransparency = 1
-TabsContainer.Position = UDim2.new(0, 0, 0, 50)
-TabsContainer.Size = UDim2.new(0, 100, 0, 350)
+TabsContainer.Position = UDim2.new(0, 0, 0, 35)
+TabsContainer.Size = UDim2.new(0, 100, 0, 365)
 
 local TabListLayout = Instance.new("UIListLayout")
-TabListLayout.Padding = UDim.new(0, 5)
+TabListLayout.Padding = UDim.new(0, 4)
 TabListLayout.Parent = TabsContainer
 
--- Content container
+-- Content container (ORIGINAL)
 local ContentContainer = Instance.new("Frame")
 ContentContainer.Name = "ContentContainer"
 ContentContainer.Parent = MainFrame
-ContentContainer.BackgroundColor3 = Color3.fromRGB(30, 30, 35)
+ContentContainer.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 ContentContainer.BorderSizePixel = 0
-ContentContainer.Position = UDim2.new(0, 100, 0, 50)
-ContentContainer.Size = UDim2.new(0, 400, 0, 350)
+ContentContainer.Position = UDim2.new(0, 100, 0, 35)
+ContentContainer.Size = UDim2.new(0, 400, 0, 365)
 
 local ContentScrolling = Instance.new("ScrollingFrame")
 ContentScrolling.Size = UDim2.new(1, 0, 1, 0)
@@ -236,32 +236,32 @@ ContentScrolling.ScrollBarImageColor3 = Settings.UI.Color
 ContentScrolling.Parent = ContentContainer
 
 local ContentLayout = Instance.new("UIListLayout")
-ContentLayout.Padding = UDim.new(0, 10)
+ContentLayout.Padding = UDim.new(0, 8)
 ContentLayout.Parent = ContentScrolling
 
--- Создание вкладок
+-- Tabs
 local tabs = {"ESP", "RAGE", "MACRO", "MISC", "README"}
 local tabButtons = {}
 local tabFrames = {}
 local currentTab = "ESP"
 
--- Функция создания кнопки вкладки
+-- Create tab buttons (SKEET STYLE)
 local function createTabButton(tabName)
     local TabButton = Instance.new("TextButton")
     TabButton.Size = UDim2.new(1, -10, 0, 30)
-    TabButton.BackgroundColor3 = Color3.fromRGB(45, 45, 50)
+    TabButton.BackgroundColor3 = Color3.fromRGB(30, 30, 30)  -- Тёмный
     TabButton.BorderSizePixel = 0
     TabButton.Text = tabName
-    TabButton.TextColor3 = Color3.fromRGB(200, 200, 200)
+    TabButton.TextColor3 = Color3.fromRGB(150, 150, 150)     -- Серый
     TabButton.TextSize = 12
-    TabButton.Font = Enum.Font.Gotham
+    TabButton.Font = Enum.Font.GothamBold
     TabButton.Parent = TabsContainer
     
     local ButtonCorner = Instance.new("UICorner")
     ButtonCorner.CornerRadius = UDim.new(0, 4)
     ButtonCorner.Parent = TabButton
     
-    -- Создаем фрейм для контента вкладки
+    -- Tab content frame
     local TabContentFrame = Instance.new("Frame")
     TabContentFrame.Size = UDim2.new(1, 0, 1, 0)
     TabContentFrame.BackgroundTransparency = 1
@@ -269,26 +269,23 @@ local function createTabButton(tabName)
     TabContentFrame.Parent = ContentScrolling
     
     local TabContentLayout = Instance.new("UIListLayout")
-    TabContentLayout.Padding = UDim.new(0, 8)
+    TabContentLayout.Padding = UDim.new(0, 6)
     TabContentLayout.Parent = TabContentFrame
     
     tabFrames[tabName] = TabContentFrame
     
     TabButton.MouseButton1Click:Connect(function()
         currentTab = tabName
-        -- Скрываем все фреймы
         for name, frame in pairs(tabFrames) do
             frame.Visible = (name == tabName)
         end
-        
-        -- Обновляем цвета всех кнопок
         for name, button in pairs(tabButtons) do
             if name == tabName then
                 button.BackgroundColor3 = Settings.UI.Color
                 button.TextColor3 = Color3.fromRGB(255, 255, 255)
             else
-                button.BackgroundColor3 = Color3.fromRGB(45, 45, 50)
-                button.TextColor3 = Color3.fromRGB(200, 200, 200)
+                button.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+                button.TextColor3 = Color3.fromRGB(150, 150, 150)
             end
         end
     end)
@@ -297,47 +294,50 @@ local function createTabButton(tabName)
     return TabContentFrame
 end
 
--- Создаем все вкладки
 for _, tabName in pairs(tabs) do
     createTabButton(tabName)
 end
 
--- Функция создания слайдера
-local function createSlider(parent, name, defaultValue, minValue, maxValue, callback)
+-- ============================================
+-- UI ELEMENTS (SKEET STYLE)
+-- ============================================
+
+function createSlider(parent, name, defaultValue, minValue, maxValue, callback)
     local SliderFrame = Instance.new("Frame")
-    SliderFrame.Size = UDim2.new(1, -20, 0, 60)
+    SliderFrame.Size = UDim2.new(1, -20, 0, 55)
     SliderFrame.BackgroundTransparency = 1
     SliderFrame.Parent = parent
     
     local SliderLabel = Instance.new("TextLabel")
-    SliderLabel.Size = UDim2.new(1, 0, 0, 20)
+    SliderLabel.Size = UDim2.new(1, -60, 0, 18)
     SliderLabel.BackgroundTransparency = 1
     SliderLabel.Text = name
-    SliderLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-    SliderLabel.TextSize = 14
+    SliderLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+    SliderLabel.TextSize = 13
     SliderLabel.Font = Enum.Font.Gotham
     SliderLabel.TextXAlignment = Enum.TextXAlignment.Left
     SliderLabel.Parent = SliderFrame
     
     local ValueLabel = Instance.new("TextLabel")
-    ValueLabel.Size = UDim2.new(0, 80, 0, 20)
-    ValueLabel.Position = UDim2.new(1, -80, 0, 0)
+    ValueLabel.Size = UDim2.new(0, 50, 0, 18)
+    ValueLabel.Position = UDim2.new(1, -50, 0, 0)
     ValueLabel.BackgroundTransparency = 1
-    ValueLabel.Text = "Q:"..tostring(defaultValue)
-    ValueLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-    ValueLabel.TextSize = 14
-    ValueLabel.Font = Enum.Font.Gotham
+    ValueLabel.Text = tostring(defaultValue)
+    ValueLabel.TextColor3 = Settings.UI.Color
+    ValueLabel.TextSize = 13
+    ValueLabel.Font = Enum.Font.GothamBold
+    ValueLabel.TextXAlignment = Enum.TextXAlignment.Right
     ValueLabel.Parent = SliderFrame
     
     local SliderBackground = Instance.new("Frame")
-    SliderBackground.Size = UDim2.new(1, 0, 0, 20)
-    SliderBackground.Position = UDim2.new(0, 0, 0, 25)
-    SliderBackground.BackgroundColor3 = Color3.fromRGB(60, 60, 65)
+    SliderBackground.Size = UDim2.new(1, 0, 0, 4)
+    SliderBackground.Position = UDim2.new(0, 0, 0, 24)
+    SliderBackground.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
     SliderBackground.BorderSizePixel = 0
     SliderBackground.Parent = SliderFrame
     
     local SliderCorner = Instance.new("UICorner")
-    SliderCorner.CornerRadius = UDim.new(0, 4)
+    SliderCorner.CornerRadius = UDim.new(0, 2)
     SliderCorner.Parent = SliderBackground
     
     local SliderFill = Instance.new("Frame")
@@ -347,46 +347,38 @@ local function createSlider(parent, name, defaultValue, minValue, maxValue, call
     SliderFill.Parent = SliderBackground
     
     local FillCorner = Instance.new("UICorner")
-    FillCorner.CornerRadius = UDim.new(0, 4)
+    FillCorner.CornerRadius = UDim.new(0, 2)
     FillCorner.Parent = SliderFill
     
-    -- Бегунок
     local SliderHandle = Instance.new("Frame")
-    SliderHandle.Size = UDim2.new(0, 6, 0, 24)
-    SliderHandle.Position = UDim2.new((defaultValue - minValue) / (maxValue - minValue), -3, 0, -2)
+    SliderHandle.Size = UDim2.new(0, 12, 0, 12)
+    SliderHandle.Position = UDim2.new((defaultValue - minValue) / (maxValue - minValue), -6, 0, -4)
     SliderHandle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     SliderHandle.BorderSizePixel = 0
     SliderHandle.Parent = SliderBackground
     
     local HandleCorner = Instance.new("UICorner")
-    HandleCorner.CornerRadius = UDim.new(0, 2)
+    HandleCorner.CornerRadius = UDim.new(0, 6)
     HandleCorner.Parent = SliderHandle
     
     local isDragging = false
     
-    -- Функция обновления слайдера
     local function updateSlider(value)
         value = math.clamp(value, minValue, maxValue)
         local fillWidth = (value - minValue) / (maxValue - minValue)
         SliderFill.Size = UDim2.new(fillWidth, 0, 1, 0)
-        SliderHandle.Position = UDim2.new(fillWidth, -3, 0, -2)
-        ValueLabel.Text = "Q:"..math.floor(value)
-        
-        if callback then
-            callback(value)
-        end
+        SliderHandle.Position = UDim2.new(fillWidth, -6, 0, -4)
+        ValueLabel.Text = tostring(math.floor(value))
+        if callback then callback(value) end
     end
     
-    -- Обработка dragging
     local function onInputChanged(input)
         if isDragging and input.UserInputType == Enum.UserInputType.MouseMovement then
             local sliderAbsolutePos = SliderBackground.AbsolutePosition
             local sliderAbsoluteSize = SliderBackground.AbsoluteSize
             local mouseX = mouse.X
-            
             local relativeX = (mouseX - sliderAbsolutePos.X) / sliderAbsoluteSize.X
             relativeX = math.clamp(relativeX, 0, 1)
-            
             local newValue = minValue + (relativeX * (maxValue - minValue))
             updateSlider(newValue)
         end
@@ -403,10 +395,8 @@ local function createSlider(parent, name, defaultValue, minValue, maxValue, call
             local sliderAbsolutePos = SliderBackground.AbsolutePosition
             local sliderAbsoluteSize = SliderBackground.AbsoluteSize
             local mouseX = mouse.X
-            
             local relativeX = (mouseX - sliderAbsolutePos.X) / sliderAbsoluteSize.X
             relativeX = math.clamp(relativeX, 0, 1)
-            
             local newValue = minValue + (relativeX * (maxValue - minValue))
             updateSlider(newValue)
         end
@@ -422,31 +412,39 @@ local function createSlider(parent, name, defaultValue, minValue, maxValue, call
     return {update = updateSlider, value = defaultValue}
 end
 
--- Функция создания кнопки
-local function createButton(parent, name, callback)
+function createButton(parent, name, callback)
     local Button = Instance.new("TextButton")
-    Button.Size = UDim2.new(1, -20, 0, 35)
-    Button.BackgroundColor3 = Settings.UI.Color
-    Button.BorderSizePixel = 0
+    Button.Size = UDim2.new(1, -20, 0, 32)
+    Button.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    Button.BorderSizePixel = 1
+    Button.BorderColor3 = Color3.fromRGB(50, 50, 50)
     Button.Text = name
-    Button.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Button.TextSize = 14
-    Button.Font = Enum.Font.Gotham
+    Button.TextColor3 = Color3.fromRGB(200, 200, 200)
+    Button.TextSize = 13
+    Button.Font = Enum.Font.GothamBold
     Button.Parent = parent
     
     local ButtonCorner = Instance.new("UICorner")
     ButtonCorner.CornerRadius = UDim.new(0, 4)
     ButtonCorner.Parent = Button
     
-    Button.MouseButton1Click:Connect(callback)
+    Button.MouseEnter:Connect(function()
+        Button.BackgroundColor3 = Settings.UI.Color
+        Button.TextColor3 = Color3.fromRGB(255, 255, 255)
+    end)
     
+    Button.MouseLeave:Connect(function()
+        Button.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+        Button.TextColor3 = Color3.fromRGB(200, 200, 200)
+    end)
+    
+    Button.MouseButton1Click:Connect(callback)
     return Button
 end
 
--- Функция создания переключателя
-local function createToggle(parent, name, defaultValue, callback)
+function createToggle(parent, name, defaultValue, callback)
     local ToggleFrame = Instance.new("Frame")
-    ToggleFrame.Size = UDim2.new(1, -20, 0, 30)
+    ToggleFrame.Size = UDim2.new(1, -20, 0, 28)
     ToggleFrame.BackgroundTransparency = 1
     ToggleFrame.Parent = parent
     
@@ -454,16 +452,16 @@ local function createToggle(parent, name, defaultValue, callback)
     ToggleLabel.Size = UDim2.new(1, -40, 1, 0)
     ToggleLabel.BackgroundTransparency = 1
     ToggleLabel.Text = name
-    ToggleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-    ToggleLabel.TextSize = 14
+    ToggleLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+    ToggleLabel.TextSize = 13
     ToggleLabel.Font = Enum.Font.Gotham
     ToggleLabel.TextXAlignment = Enum.TextXAlignment.Left
     ToggleLabel.Parent = ToggleFrame
     
     local ToggleButton = Instance.new("TextButton")
-    ToggleButton.Size = UDim2.new(0, 30, 0, 30)
-    ToggleButton.Position = UDim2.new(1, -30, 0, 0)
-    ToggleButton.BackgroundColor3 = defaultValue and Settings.UI.Color or Color3.fromRGB(60, 60, 65)
+    ToggleButton.Size = UDim2.new(0, 30, 0, 26)
+    ToggleButton.Position = UDim2.new(1, -30, 0, 1)
+    ToggleButton.BackgroundColor3 = defaultValue and Settings.UI.Color or Color3.fromRGB(40, 40, 40)
     ToggleButton.BorderSizePixel = 0
     ToggleButton.Text = ""
     ToggleButton.Parent = ToggleFrame
@@ -474,19 +472,16 @@ local function createToggle(parent, name, defaultValue, callback)
     
     ToggleButton.MouseButton1Click:Connect(function()
         defaultValue = not defaultValue
-        ToggleButton.BackgroundColor3 = defaultValue and Settings.UI.Color or Color3.fromRGB(60, 60, 65)
-        if callback then
-            callback(defaultValue)
-        end
+        ToggleButton.BackgroundColor3 = defaultValue and Settings.UI.Color or Color3.fromRGB(40, 40, 40)
+        if callback then callback(defaultValue) end
     end)
     
     return {frame = ToggleFrame, button = ToggleButton, value = defaultValue}
 end
 
--- Функция создания keybind кнопки
-local function createKeybind(parent, name, currentKey, callback)
+function createKeybind(parent, name, currentKey, callback)
     local KeybindFrame = Instance.new("Frame")
-    KeybindFrame.Size = UDim2.new(1, -20, 0, 30)
+    KeybindFrame.Size = UDim2.new(1, -20, 0, 28)
     KeybindFrame.BackgroundTransparency = 1
     KeybindFrame.Parent = parent
     
@@ -494,8 +489,8 @@ local function createKeybind(parent, name, currentKey, callback)
     KeybindLabel.Size = UDim2.new(0, 120, 1, 0)
     KeybindLabel.BackgroundTransparency = 1
     KeybindLabel.Text = name
-    KeybindLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-    KeybindLabel.TextSize = 14
+    KeybindLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+    KeybindLabel.TextSize = 13
     KeybindLabel.Font = Enum.Font.Gotham
     KeybindLabel.TextXAlignment = Enum.TextXAlignment.Left
     KeybindLabel.Parent = KeybindFrame
@@ -503,12 +498,13 @@ local function createKeybind(parent, name, currentKey, callback)
     local KeybindButton = Instance.new("TextButton")
     KeybindButton.Size = UDim2.new(0, 100, 1, 0)
     KeybindButton.Position = UDim2.new(0, 130, 0, 0)
-    KeybindButton.BackgroundColor3 = Color3.fromRGB(60, 60, 65)
-    KeybindButton.BorderSizePixel = 0
-    KeybindButton.Text = currentKey and currentKey.Name or "Click to bind"
-    KeybindButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-    KeybindButton.TextSize = 12
-    KeybindButton.Font = Enum.Font.Gotham
+    KeybindButton.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    KeybindButton.BorderSizePixel = 1
+    KeybindButton.BorderColor3 = Color3.fromRGB(50, 50, 50)
+    KeybindButton.Text = currentKey and currentKey.Name or "None"
+    KeybindButton.TextColor3 = Color3.fromRGB(200, 200, 200)
+    KeybindButton.TextSize = 11
+    KeybindButton.Font = Enum.Font.GothamBold
     KeybindButton.Parent = KeybindFrame
     
     local KeybindCorner = Instance.new("UICorner")
@@ -520,18 +516,16 @@ local function createKeybind(parent, name, currentKey, callback)
     KeybindButton.MouseButton1Click:Connect(function()
         if not binding then
             binding = true
-            KeybindButton.Text = "Press any key..."
-            KeybindButton.TextColor3 = Color3.fromRGB(255, 255, 0)
+            KeybindButton.Text = "..."
+            KeybindButton.TextColor3 = Settings.UI.Color
             
             local connection
             connection = UserInputService.InputBegan:Connect(function(input)
                 if input.UserInputType == Enum.UserInputType.Keyboard then
                     KeybindButton.Text = input.KeyCode.Name
-                    KeybindButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+                    KeybindButton.TextColor3 = Color3.fromRGB(200, 200, 200)
                     binding = false
-                    if callback then
-                        callback(input.KeyCode)
-                    end
+                    if callback then callback(input.KeyCode) end
                     connection:Disconnect()
                 end
             end)
@@ -541,67 +535,57 @@ local function createKeybind(parent, name, currentKey, callback)
     return KeybindButton
 end
 
--- Функция создания цветового пикера с preset цветами
-local function createColorPicker(parent, name, currentColor, callback)
+function createColorPicker(parent, name, currentColor, callback)
     local ColorFrame = Instance.new("Frame")
-    ColorFrame.Size = UDim2.new(1, -20, 0, 80)
+    ColorFrame.Size = UDim2.new(1, -20, 0, 75)
     ColorFrame.BackgroundTransparency = 1
     ColorFrame.Parent = parent
     
     local ColorLabel = Instance.new("TextLabel")
-    ColorLabel.Size = UDim2.new(1, 0, 0, 20)
+    ColorLabel.Size = UDim2.new(1, 0, 0, 18)
     ColorLabel.BackgroundTransparency = 1
     ColorLabel.Text = name
-    ColorLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-    ColorLabel.TextSize = 14
+    ColorLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+    ColorLabel.TextSize = 13
     ColorLabel.Font = Enum.Font.Gotham
     ColorLabel.TextXAlignment = Enum.TextXAlignment.Left
     ColorLabel.Parent = ColorFrame
     
-    -- Preset цвета
     local presetColors = {
-        {Name = "Зеленый", Color = Color3.fromRGB(0, 255, 0)},
-        {Name = "Желтый", Color = Color3.fromRGB(255, 255, 0)},
-        {Name = "Красный", Color = Color3.fromRGB(255, 0, 0)},
-        {Name = "Синий", Color = Color3.fromRGB(0, 100, 255)},
-        {Name = "Белый", Color = Color3.fromRGB(255, 255, 255)},
-        {Name = "Фиолетовый", Color = Color3.fromRGB(128, 0, 128)},
-        {Name = "Розовый", Color = Color3.fromRGB(255, 105, 180)},
-        {Name = "Оранжевый", Color = Color3.fromRGB(255, 165, 0)}
+        {Name = "Blue", Color = Color3.fromRGB(0, 150, 255)},
+        {Name = "Green", Color = Color3.fromRGB(0, 255, 0)},
+        {Name = "Yellow", Color = Color3.fromRGB(255, 255, 0)},
+        {Name = "Red", Color = Color3.fromRGB(255, 0, 0)},
+        {Name = "White", Color = Color3.fromRGB(255, 255, 255)},
+        {Name = "Purple", Color = Color3.fromRGB(128, 0, 128)},
+        {Name = "Pink", Color = Color3.fromRGB(255, 105, 180)},
+        {Name = "Orange", Color = Color3.fromRGB(255, 165, 0)}
     }
     
-    local colorButtons = {}
     for i, colorData in ipairs(presetColors) do
         local row = math.floor((i-1)/4)
         local col = (i-1) % 4
         
         local ColorButton = Instance.new("TextButton")
-        ColorButton.Size = UDim2.new(0, 40, 0, 20)
-        ColorButton.Position = UDim2.new(0, col * 45, 0, 25 + row * 25)
+        ColorButton.Size = UDim2.new(0, 38, 0, 18)
+        ColorButton.Position = UDim2.new(0, col * 42, 0, 22 + row * 24)
         ColorButton.BackgroundColor3 = colorData.Color
         ColorButton.BorderSizePixel = 1
-        ColorButton.BorderColor3 = Color3.fromRGB(255, 255, 255)
+        ColorButton.BorderColor3 = Color3.fromRGB(50, 50, 50)
         ColorButton.Text = ""
         ColorButton.Parent = ColorFrame
         
         local ColorCorner = Instance.new("UICorner")
-        ColorCorner.CornerRadius = UDim.new(0, 4)
+        ColorCorner.CornerRadius = UDim.new(0, 3)
         ColorCorner.Parent = ColorButton
         
         ColorButton.MouseButton1Click:Connect(function()
-            if callback then
-                callback(colorData.Color)
-            end
+            if callback then callback(colorData.Color) end
         end)
-        
-        colorButtons[colorData.Name] = ColorButton
     end
-    
-    return ColorFrame
 end
 
--- Функция обновления цветов UI
-local function UpdateUIColors()
+function UpdateUIColors()
     Title.TextColor3 = Settings.UI.Color
     ContentScrolling.ScrollBarImageColor3 = Settings.UI.Color
     
@@ -610,16 +594,19 @@ local function UpdateUIColors()
             button.BackgroundColor3 = Settings.UI.Color
             button.TextColor3 = Color3.fromRGB(255, 255, 255)
         else
-            button.BackgroundColor3 = Color3.fromRGB(45, 45, 50)
-            button.TextColor3 = Color3.fromRGB(200, 200, 200)
+            button.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+            button.TextColor3 = Color3.fromRGB(150, 150, 150)
         end
     end
 end
 
--- СИСТЕМА СПИД-БУСТА
+-- ============================================
+-- SPEED SYSTEM
+-- ============================================
+
 local SpeedConnection = nil
 
-local function ApplySpeedBoost()
+function ApplySpeedBoost()
     if player.Character then
         local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
         if humanoid then
@@ -630,10 +617,9 @@ local function ApplySpeedBoost()
     end
 end
 
-local function ActivateSpeedBoost()
+function ActivateSpeedBoost()
     if not Settings.Macro.SpeedEnabled then return end
     
-    -- Сохраняем оригинальную скорость
     if player.Character then
         local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
         if humanoid then
@@ -641,10 +627,8 @@ local function ActivateSpeedBoost()
         end
     end
     
-    -- Применяем скорость
     ApplySpeedBoost()
     
-    -- Создаем постоянное обновление
     if SpeedConnection then
         SpeedConnection:Disconnect()
     end
@@ -654,7 +638,7 @@ local function ActivateSpeedBoost()
     end)
 end
 
-local function DeactivateSpeedBoost()
+function DeactivateSpeedBoost()
     Settings.Macro.SpeedEnabled = false
     
     if SpeedConnection then
@@ -662,7 +646,6 @@ local function DeactivateSpeedBoost()
         SpeedConnection = nil
     end
     
-    -- Возвращаем оригинальную скорость
     if player.Character then
         local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
         if humanoid then
@@ -673,11 +656,14 @@ local function DeactivateSpeedBoost()
     end
 end
 
+-- ============================================
 -- FLY SYSTEM
+-- ============================================
+
 local FlyConnection = nil
 local BodyVelocity = nil
 
-local function StartFlying()
+function StartFlying()
     if not player.Character then return end
     
     local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
@@ -687,7 +673,6 @@ local function StartFlying()
     
     Settings.Macro.Flying = true
     
-    -- Create BodyVelocity for flying
     BodyVelocity = Instance.new("BodyVelocity")
     BodyVelocity.Velocity = Vector3.new(0, 0, 0)
     BodyVelocity.MaxForce = Vector3.new(4000, 4000, 4000)
@@ -732,7 +717,7 @@ local function StartFlying()
     end)
 end
 
-local function StopFlying()
+function StopFlying()
     Settings.Macro.Flying = false
     
     if FlyConnection then
@@ -746,10 +731,13 @@ local function StopFlying()
     end
 end
 
--- JUMP BOOST SYSTEM (ИСПРАВЛЕННАЯ)
+-- ============================================
+-- JUMP BOOST SYSTEM
+-- ============================================
+
 local JumpConnection = nil
 
-local function ApplyJumpBoost()
+function ApplyJumpBoost()
     if player.Character then
         local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
         if humanoid then
@@ -760,10 +748,9 @@ local function ApplyJumpBoost()
     end
 end
 
-local function ActivateJumpBoost()
+function ActivateJumpBoost()
     if not Settings.Macro.JumpEnabled then return end
     
-    -- Сохраняем оригинальную силу прыжка
     if player.Character then
         local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
         if humanoid then
@@ -771,10 +758,8 @@ local function ActivateJumpBoost()
         end
     end
     
-    -- Применяем силу прыжка
     ApplyJumpBoost()
     
-    -- Создаем постоянное обновление
     if JumpConnection then
         JumpConnection:Disconnect()
     end
@@ -784,7 +769,7 @@ local function ActivateJumpBoost()
     end)
 end
 
-local function RemoveJumpBoost()
+function RemoveJumpBoost()
     Settings.Macro.JumpEnabled = false
     
     if JumpConnection then
@@ -792,7 +777,6 @@ local function RemoveJumpBoost()
         JumpConnection = nil
     end
     
-    -- Возвращаем оригинальную силу прыжка
     if player.Character then
         local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
         if humanoid then
@@ -803,13 +787,15 @@ local function RemoveJumpBoost()
     end
 end
 
--- ESP SYSTEM (ТОЧЬ В ТОЧЬ КАК НА ФОТО)
+-- ============================================
+-- ESP SYSTEM
+-- ============================================
+
 function CreateESP(targetPlayer)
     if not targetPlayer.Character then return end
     
     local esp = {}
     
-    -- Hitbox
     esp.Hitbox = Instance.new("BoxHandleAdornment")
     esp.Hitbox.Name = "HitboxESP"
     esp.Hitbox.Adornee = targetPlayer.Character:FindFirstChild("HumanoidRootPart")
@@ -823,11 +809,10 @@ function CreateESP(targetPlayer)
         esp.Hitbox.Parent = targetPlayer.Character.HumanoidRootPart
     end
     
-    -- Username (ТОЧЬ В ТОЧЬ КАК НА ФОТО)
     esp.Username = Instance.new("BillboardGui")
     esp.Username.Name = "UsernameESP"
     esp.Username.Size = UDim2.new(0, 200, 0, 30)
-    esp.Username.StudsOffset = Vector3.new(0, 2.5, 0) -- Снизу игрока
+    esp.Username.StudsOffset = Vector3.new(0, 2.5, 0)
     esp.Username.AlwaysOnTop = true
     esp.Username.Enabled = Settings.ESP.Username
     
@@ -838,7 +823,7 @@ function CreateESP(targetPlayer)
     UsernameLabel.Text = targetPlayer.Name
     UsernameLabel.TextColor3 = Settings.ESP.Color
     UsernameLabel.TextSize = 14
-    UsernameLabel.Font = Enum.Font.SourceSansBold -- Шрифт как на фото
+    UsernameLabel.Font = Enum.Font.GothamBold
     UsernameLabel.TextStrokeTransparency = 0.5
     UsernameLabel.TextStrokeColor3 = Color3.new(0, 0, 0)
     
@@ -847,38 +832,36 @@ function CreateESP(targetPlayer)
         esp.Username.Parent = targetPlayer.Character.Head
     end
     
-    -- Healthbar (ТОЧЬ В ТОЧЬ КАК НА ФОТО - ТОНКАЯ И ДЛИННАЯ СЛЕВА)
-esp.Healthbar = Instance.new("BillboardGui")
-esp.Healthbar.Name = "HealthbarESP"
-esp.Healthbar.Size = UDim2.new(0, 4, 0, 100) -- Тонкая и высокая полоска
-esp.Healthbar.StudsOffset = Vector3.new(-2.5, 0, 0) -- Слева от игрока
-esp.Healthbar.AlwaysOnTop = true
-esp.Healthbar.Enabled = Settings.ESP.Healthbar
-
-local HealthbarBackground = Instance.new("Frame")
-HealthbarBackground.Parent = esp.Healthbar
-HealthbarBackground.Size = UDim2.new(1, 0, 1, 0)
-HealthbarBackground.BackgroundColor3 = Color3.new(0.05, 0.05, 0.05) -- Темный фон
-HealthbarBackground.BorderSizePixel = 1
-HealthbarBackground.BorderColor3 = Color3.new(0.2, 0.2, 0.2) -- Темная рамка
-HealthbarBackground.BackgroundTransparency = 0.2
-
-local HealthbarFill = Instance.new("Frame")
-HealthbarFill.Parent = HealthbarBackground
-HealthbarFill.Size = UDim2.new(1, 0, 1, 0) -- Полная высота
-HealthbarFill.BackgroundColor3 = Color3.new(0, 0.4, 0) -- Темно-зеленый
-HealthbarFill.BorderSizePixel = 0
-HealthbarFill.AnchorPoint = Vector2.new(0, 1) -- Якорь внизу
-HealthbarFill.Position = UDim2.new(0, 0, 1, 0) -- Начинается снизу
-
-esp.HealthbarFill = HealthbarFill
-
-if targetPlayer.Character:FindFirstChild("Head") then
-    esp.Healthbar.Adornee = targetPlayer.Character.Head
-    esp.Healthbar.Parent = targetPlayer.Character.Head
-end
+    esp.Healthbar = Instance.new("BillboardGui")
+    esp.Healthbar.Name = "HealthbarESP"
+    esp.Healthbar.Size = UDim2.new(0, 4, 0, 100)
+    esp.Healthbar.StudsOffset = Vector3.new(-2.5, 0, 0)
+    esp.Healthbar.AlwaysOnTop = true
+    esp.Healthbar.Enabled = Settings.ESP.Healthbar
     
-    -- Glow
+    local HealthbarBackground = Instance.new("Frame")
+    HealthbarBackground.Parent = esp.Healthbar
+    HealthbarBackground.Size = UDim2.new(1, 0, 1, 0)
+    HealthbarBackground.BackgroundColor3 = Color3.new(0.05, 0.05, 0.05)
+    HealthbarBackground.BorderSizePixel = 1
+    HealthbarBackground.BorderColor3 = Color3.new(0.2, 0.2, 0.2)
+    HealthbarBackground.BackgroundTransparency = 0.2
+    
+    local HealthbarFill = Instance.new("Frame")
+    HealthbarFill.Parent = HealthbarBackground
+    HealthbarFill.Size = UDim2.new(1, 0, 1, 0)
+    HealthbarFill.BackgroundColor3 = Color3.new(0, 0.4, 0)
+    HealthbarFill.BorderSizePixel = 0
+    HealthbarFill.AnchorPoint = Vector2.new(0, 1)
+    HealthbarFill.Position = UDim2.new(0, 0, 1, 0)
+    
+    esp.HealthbarFill = HealthbarFill
+    
+    if targetPlayer.Character:FindFirstChild("Head") then
+        esp.Healthbar.Adornee = targetPlayer.Character.Head
+        esp.Healthbar.Parent = targetPlayer.Character.Head
+    end
+    
     esp.Glow = Instance.new("Highlight")
     esp.Glow.Name = "GlowESP"
     esp.Glow.FillColor = Settings.ESP.Color
@@ -890,7 +873,6 @@ end
     
     ESPObjects[targetPlayer] = esp
     
-    -- Update healthbar
     local humanoid = targetPlayer.Character:FindFirstChildOfClass("Humanoid")
     if humanoid then
         humanoid.HealthChanged:Connect(function()
@@ -907,20 +889,15 @@ function UpdateHealthbar(player)
     local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
     if not humanoid then return end
     
-    local health = humanoid.Health
-    local maxHealth = humanoid.MaxHealth
-    local healthPercent = health / maxHealth
-    
-    -- Обновляем высоту полоски здоровья (теперь она вертикальная)
+    local healthPercent = humanoid.Health / humanoid.MaxHealth
     esp.HealthbarFill.Size = UDim2.new(1, 0, healthPercent, 0)
     
-    -- Изменяем цвет в зависимости от здоровья (темные цвета как на фото)
     if healthPercent > 0.7 then
-        esp.HealthbarFill.BackgroundColor3 = Color3.new(0, 0.4, 0) -- Темно-зеленый
+        esp.HealthbarFill.BackgroundColor3 = Color3.new(0, 0.4, 0)
     elseif healthPercent > 0.3 then
-        esp.HealthbarFill.BackgroundColor3 = Color3.new(0.4, 0.4, 0) -- Темно-желтый
+        esp.HealthbarFill.BackgroundColor3 = Color3.new(0.4, 0.4, 0)
     else
-        esp.HealthbarFill.BackgroundColor3 = Color3.new(0.4, 0, 0) -- Темно-красный
+        esp.HealthbarFill.BackgroundColor3 = Color3.new(0.4, 0, 0)
     end
 end
 
@@ -964,9 +941,11 @@ function ClearAllESP()
     end
 end
 
--- Input handling
+-- ============================================
+-- INPUT HANDLING
+-- ============================================
+
 UserInputService.InputBegan:Connect(function(input)
-    -- Speed Boost Toggle
     if input.KeyCode == Settings.Macro.SpeedKey then
         Settings.Macro.SpeedEnabled = not Settings.Macro.SpeedEnabled
         if Settings.Macro.SpeedEnabled then
@@ -978,7 +957,6 @@ UserInputService.InputBegan:Connect(function(input)
         end
     end
     
-    -- Fly Toggle
     if input.KeyCode == Settings.Macro.FlyKey and Settings.Macro.FlyEnabled then
         if Settings.Macro.Flying then
             StopFlying()
@@ -989,7 +967,6 @@ UserInputService.InputBegan:Connect(function(input)
         end
     end
     
-    -- Camera Lock Toggle
     if input.KeyCode == Settings.Rage.CameraLockKey then
         if Settings.Rage.AimlockState == true and Settings.Rage.CameraLock then
             Locked = not Locked
@@ -1012,7 +989,6 @@ UserInputService.InputBegan:Connect(function(input)
         end
     end
     
-    -- Disable Aimlock
     if input.KeyCode == Settings.Rage.DisableKey then
         Settings.Rage.AimlockState = not Settings.Rage.AimlockState
         if Settings.Rage.AimlockState then
@@ -1024,23 +1000,23 @@ UserInputService.InputBegan:Connect(function(input)
         end
     end
     
-    -- Toggle UI with DEL key
     if input.KeyCode == Enum.KeyCode.Delete then
         MainFrame.Visible = not MainFrame.Visible
     end
 end)
 
--- Camera Lock System (СТАБИЛЬНАЯ ВЕРСИЯ)
+-- ============================================
+-- RENDER LOOP
+-- ============================================
+
 RunService.RenderStepped:Connect(function()
     update()
     
     if Settings.Rage.AimlockState == true and Settings.Rage.CameraLock then
         if Locked then
-            -- Проверяем цель каждые 0.1 секунды для стабильности
             if tick() - LastTargetCheck > 0.1 then
                 LastTargetCheck = tick()
                 
-                -- Если цель не существует или умерла, ищем новую
                 if not Victim or not Victim.Character or not Victim.Character:FindFirstChild(Settings.Rage.AimPart) or Victim.Character.Humanoid.Health <= 0 then
                     Victim = getClosest()
                     if not Victim then
@@ -1050,7 +1026,6 @@ RunService.RenderStepped:Connect(function()
                 end
             end
             
-            -- Если цель существует, следим за ней
             if Victim and Victim.Character and Victim.Character:FindFirstChild(Settings.Rage.AimPart) then
                 local targetPart = Victim.Character:FindFirstChild(Settings.Rage.AimPart)
                 local humanoid = Victim.Character:FindFirstChildOfClass("Humanoid")
@@ -1069,12 +1044,14 @@ RunService.RenderStepped:Connect(function()
     end
 end)
 
--- Основной цикл обновления хитбоксов
 RunService.RenderStepped:Connect(function()
     UpdateHitboxes()
 end)
 
--- Player connection handling
+-- ============================================
+-- PLAYER CONNECTIONS
+-- ============================================
+
 Players.PlayerAdded:Connect(function(newPlayer)
     if newPlayer ~= player then
         if newPlayer.Character then
@@ -1091,7 +1068,6 @@ Players.PlayerRemoving:Connect(function(leftPlayer)
     RemoveESP(leftPlayer)
 end)
 
--- Initialize ESP for all existing players
 for _, existingPlayer in pairs(Players:GetPlayers()) do
     if existingPlayer ~= player then
         if existingPlayer.Character then
@@ -1104,25 +1080,24 @@ for _, existingPlayer in pairs(Players:GetPlayers()) do
     end
 end
 
--- Auto-apply features when character respawns
 player.CharacterAdded:Connect(function(character)
     wait(1)
-    
     if Settings.Macro.SpeedEnabled then
         ApplySpeedBoost()
     end
-    
     if Settings.Macro.JumpEnabled then
         ApplyJumpBoost()
     end
-    
     if Settings.Macro.Flying then
         StopFlying()
         StartFlying()
     end
 end)
 
--- Make draggable
+-- ============================================
+-- DRAGGABLE
+-- ============================================
+
 local dragging = false
 local dragInput, dragStart, startPos
 
@@ -1153,38 +1128,38 @@ UserInputService.InputChanged:Connect(function(input)
     end
 end)
 
--- Создаем контент для всех вкладок
-local function createESPTab()
+-- ============================================
+-- CREATE TAB CONTENTS
+-- ============================================
+
+function createESPTab()
     local espFrame = tabFrames["ESP"]
     
-    -- ESP Toggles
-    local hitboxToggle = createToggle(espFrame, "Hitbox ESP", Settings.ESP.Hitbox, function(value)
+    createToggle(espFrame, "Hitbox ESP", Settings.ESP.Hitbox, function(value)
         Settings.ESP.Hitbox = value
         UpdateAllESP()
     end)
     
-    local usernameToggle = createToggle(espFrame, "Username ESP", Settings.ESP.Username, function(value)
+    createToggle(espFrame, "Username ESP", Settings.ESP.Username, function(value)
         Settings.ESP.Username = value
         UpdateAllESP()
     end)
     
-    local healthbarToggle = createToggle(espFrame, "Healthbar ESP", Settings.ESP.Healthbar, function(value)
+    createToggle(espFrame, "Healthbar ESP", Settings.ESP.Healthbar, function(value)
         Settings.ESP.Healthbar = value
         UpdateAllESP()
     end)
     
-    local glowToggle = createToggle(espFrame, "Glow ESP", Settings.ESP.Glow, function(value)
+    createToggle(espFrame, "Glow ESP", Settings.ESP.Glow, function(value)
         Settings.ESP.Glow = value
         UpdateAllESP()
     end)
     
-    -- ESP Color Picker
     createColorPicker(espFrame, "ESP Color", Settings.ESP.Color, function(color)
         Settings.ESP.Color = color
         UpdateAllESP()
     end)
     
-    -- Refresh ESP Button
     createButton(espFrame, "Refresh ESP", function()
         ClearAllESP()
         for _, player in pairs(Players:GetPlayers()) do
@@ -1196,10 +1171,9 @@ local function createESPTab()
     end)
 end
 
-local function createRageTab()
+function createRageTab()
     local rageFrame = tabFrames["RAGE"]
     
-    -- Camera Lock Section
     createToggle(rageFrame, "Camera Lock", Settings.Rage.CameraLock, function(value)
         Settings.Rage.CameraLock = value
         if not value then
@@ -1211,19 +1185,16 @@ local function createRageTab()
         end
     end)
     
-    -- Camera Lock Keybind
     createKeybind(rageFrame, "Camera Lock Key", Settings.Rage.CameraLockKey, function(key)
         Settings.Rage.CameraLockKey = key
         Notify("Camera Lock key set to: "..key.Name)
     end)
     
-    -- Disable Keybind
     createKeybind(rageFrame, "Disable Key", Settings.Rage.DisableKey, function(key)
         Settings.Rage.DisableKey = key
         Notify("Disable key set to: "..key.Name)
     end)
     
-    -- FOV Settings
     createSlider(rageFrame, "FOV Value", Settings.Rage.FOV, 10, 200, function(value)
         Settings.Rage.FOV = value
     end)
@@ -1232,65 +1203,47 @@ local function createRageTab()
         Settings.Rage.ShowCircle = value
     end)
     
-    -- Prediction Slider
     createSlider(rageFrame, "Prediction", Settings.Rage.Prediction, 0.1, 2.0, function(value)
         Settings.Rage.Prediction = value
     end)
     
-    -- НОВЫЙ РАЗДЕЛ: HITBOX EXPANDER
-    local HitboxExpanderLabel = Instance.new("TextLabel")
-    HitboxExpanderLabel.Size = UDim2.new(1, -20, 0, 20)
-    HitboxExpanderLabel.BackgroundTransparency = 1
-    HitboxExpanderLabel.Text = "HITBOX EXPANDER"
-    HitboxExpanderLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-    HitboxExpanderLabel.TextSize = 16
-    HitboxExpanderLabel.Font = Enum.Font.GothamBold
-    HitboxExpanderLabel.TextXAlignment = Enum.TextXAlignment.Left
-    HitboxExpanderLabel.Parent = rageFrame
-    
-    -- Включение/выключение хитбокс экспандера
+    -- HITBOX EXPANDER
     createToggle(rageFrame, "Hitbox Expander", Settings.Rage.HitboxExpander.Enabled, function(value)
         Settings.Rage.HitboxExpander.Enabled = value
         UpdateHitboxes()
         Notify("Hitbox Expander: " .. (value and "ON" or "OFF"))
     end)
     
-    -- Видимость хитбоксов
     createToggle(rageFrame, "Show Hitboxes", Settings.Rage.HitboxExpander.Visible, function(value)
         Settings.Rage.HitboxExpander.Visible = value
         UpdateHitboxes()
         Notify("Hitboxes: " .. (value and "VISIBLE" or "INVISIBLE"))
     end)
     
-    -- Размер хитбоксов
     createSlider(rageFrame, "Hitbox Size", Settings.Rage.HitboxExpander.HeadSize, 10, 200, function(value)
         Settings.Rage.HitboxExpander.HeadSize = value
         UpdateHitboxes()
     end)
     
-    -- Прозрачность хитбоксов
     createSlider(rageFrame, "Hitbox Transparency", Settings.Rage.HitboxExpander.Transparency * 100, 0, 100, function(value)
         Settings.Rage.HitboxExpander.Transparency = value / 100
         UpdateHitboxes()
     end)
     
-    -- Цвет хитбоксов
     createColorPicker(rageFrame, "Hitbox Color", Settings.Rage.HitboxExpander.Color, function(color)
         Settings.Rage.HitboxExpander.Color = color
         UpdateHitboxes()
     end)
     
-    -- Кнопка обновления хитбоксов
     createButton(rageFrame, "Update All Hitboxes", function()
         UpdateHitboxes()
         Notify("Hitboxes updated for all players!")
     end)
 end
 
-local function createMacroTab()
+function createMacroTab()
     local macroFrame = tabFrames["MACRO"]
     
-    -- Speed Boost Section
     createToggle(macroFrame, "Speed Boost", Settings.Macro.SpeedEnabled, function(value)
         Settings.Macro.SpeedEnabled = value
         if value then
@@ -1314,7 +1267,6 @@ local function createMacroTab()
         Notify("Speed key set to: "..key.Name)
     end)
     
-    -- Fly Section
     createToggle(macroFrame, "Fly", Settings.Macro.FlyEnabled, function(value)
         Settings.Macro.FlyEnabled = value
         if not value and Settings.Macro.Flying then
@@ -1334,7 +1286,6 @@ local function createMacroTab()
         Notify("Fly key set to: "..key.Name)
     end)
     
-    -- Jump Boost Section (ИСПРАВЛЕННАЯ)
     createToggle(macroFrame, "Jump Boost", Settings.Macro.JumpEnabled, function(value)
         Settings.Macro.JumpEnabled = value
         if value then
@@ -1354,17 +1305,15 @@ local function createMacroTab()
     end)
 end
 
-local function createMiscTab()
+function createMiscTab()
     local miscFrame = tabFrames["MISC"]
     
-    -- UI Customization
     createColorPicker(miscFrame, "UI Color", Settings.UI.Color, function(color)
         Settings.UI.Color = color
         UpdateUIColors()
         Notify("UI Color Updated!")
     end)
     
-    -- Reset Settings
     createButton(miscFrame, "Reset All Settings", function()
         Settings = {
             ESP = {
@@ -1372,7 +1321,7 @@ local function createMiscTab()
                 Username = false,
                 Healthbar = false,
                 Glow = false,
-                Color = Color3.fromRGB(0, 100, 255)
+                Color = Color3.fromRGB(0, 150, 255)
             },
             Rage = {
                 SilentAim = false,
@@ -1384,8 +1333,6 @@ local function createMiscTab()
                 AimPart = "HumanoidRootPart",
                 Prediction = 0.15038,
                 AimlockState = true,
-                
-                -- НОВЫЕ НАСТРОЙКИ ХИТБОКС ЭКСПАНДЕРА
                 HitboxExpander = {
                     Enabled = false,
                     HeadSize = 50,
@@ -1399,18 +1346,16 @@ local function createMiscTab()
                 Speed = 50,
                 OriginalSpeed = 16,
                 SpeedKey = nil,
-                
                 FlyEnabled = false,
                 FlySpeed = 3,
                 FlyKey = nil,
                 Flying = false,
-                
                 JumpEnabled = false,
                 JumpPower = 50,
                 OriginalJump = 50
             },
             UI = {
-                Color = Color3.fromRGB(0, 100, 255)
+                Color = Color3.fromRGB(0, 150, 255)
             }
         }
         UpdateUIColors()
@@ -1424,19 +1369,16 @@ local function createMiscTab()
         Notify("All settings reset!")
     end)
     
-    -- Hide UI
     createButton(miscFrame, "Hide UI", function()
         MainFrame.Visible = false
         Notify("UI Hidden - Press DEL to show")
     end)
     
-    -- Show UI
     createButton(miscFrame, "Show UI", function()
         MainFrame.Visible = true
         Notify("UI Shown")
     end)
     
-    -- Unload Script
     createButton(miscFrame, "Unload Script", function()
         _G.CondaCC = false
         ScreenGui:Destroy()
@@ -1460,7 +1402,7 @@ local function createMiscTab()
     end)
 end
 
-local function createReadmeTab()
+function createReadmeTab()
     local readmeFrame = tabFrames["README"]
     
     local ReadmeText = [[
@@ -1483,10 +1425,9 @@ HITBOX EXPANDER:
 • Toggle visibility on/off
 • Change colors like ESP
 • Adjust transparency
-• Works on all players
 
 MACRO FEATURES:
-• Speed Boost - Adjustable speed (16-150) with keybind
+• Speed Boost - Adjustable speed (16-150)
 • Fly - Flight system with speed control
 • Jump Boost - Enhanced jumping (50-200)
 
@@ -1495,33 +1436,14 @@ CONTROLS:
 • Custom keybinds for Camera Lock, Speed, Fly
 • Disable key to turn off aimlock
 
-USAGE:
-1. Enable features in respective tabs
-2. Set keybinds in RAGE and MACRO tabs
-3. Adjust sliders for customization
-4. Use keybinds for quick toggling
-
-NOTES:
-• Works in ALL Roblox games
-• ESP applies to ALL players instantly
-• All changes take effect immediately
-• Camera Lock now stable and reliable
-
-Created for legit gameplay
-Not for HvH!
-
-Contacts:
-Discord: jwke
-Roblox: dgdhdhdqoqpwjd
-
-CONDA.CC - Universal Script
+Press DEL to toggle UI
 ]]
     
     local ReadmeLabel = Instance.new("TextLabel")
-    ReadmeLabel.Size = UDim2.new(1, -20, 0, 600)
+    ReadmeLabel.Size = UDim2.new(1, -20, 0, 500)
     ReadmeLabel.BackgroundTransparency = 1
     ReadmeLabel.Text = ReadmeText
-    ReadmeLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    ReadmeLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
     ReadmeLabel.TextSize = 12
     ReadmeLabel.Font = Enum.Font.Gotham
     ReadmeLabel.TextXAlignment = Enum.TextXAlignment.Left
@@ -1530,21 +1452,21 @@ CONDA.CC - Universal Script
     ReadmeLabel.Parent = readmeFrame
 end
 
--- Создаем контент для всех вкладок
+-- ============================================
+-- INITIALIZATION
+-- ============================================
+
 createESPTab()
 createRageTab()
 createMacroTab()
 createMiscTab()
 createReadmeTab()
 
--- Initialization
--- Активируем первую вкладку
 currentTab = "ESP"
 tabFrames["ESP"].Visible = true
 tabButtons["ESP"].BackgroundColor3 = Settings.UI.Color
 tabButtons["ESP"].TextColor3 = Color3.fromRGB(255, 255, 255)
 
--- Apply initial settings
 if Settings.Macro.SpeedEnabled then
     ActivateSpeedBoost()
 end
@@ -1553,7 +1475,6 @@ if Settings.Macro.JumpEnabled then
     ActivateJumpBoost()
 end
 
--- Load notification
 local function ShowNotification()
     local NotifGui = Instance.new("ScreenGui")
     local NotifFrame = Instance.new("Frame")
@@ -1565,36 +1486,31 @@ local function ShowNotification()
     
     NotifFrame.Parent = NotifGui
     NotifFrame.BackgroundColor3 = Color3.new(0, 0, 0)
-    NotifFrame.Size = UDim2.new(0, 300, 0, 60)
+    NotifFrame.Size = UDim2.new(0, 300, 0, 50)
     NotifFrame.Position = UDim2.new(1, 0, 1, 0)
     NotifFrame.AnchorPoint = Vector2.new(1, 1)
     
     NotifCorner.Parent = NotifFrame
-    NotifCorner.CornerRadius = UDim.new(0, 8)
+    NotifCorner.CornerRadius = UDim.new(0, 4)
     
     NotifLabel.Parent = NotifFrame
     NotifLabel.Size = UDim2.new(1, 0, 1, 0)
     NotifLabel.BackgroundTransparency = 1
-    NotifLabel.Text = "CONDA.CC loaded successfully!\nSet keybinds in RAGE/MACRO tabs"
+    NotifLabel.Text = "CONDA.CC loaded! Press DEL to toggle"
     NotifLabel.TextColor3 = Settings.UI.Color
     NotifLabel.Font = Enum.Font.GothamBold
     NotifLabel.TextScaled = true
     
-    -- Animate notification
     NotifFrame:TweenPosition(UDim2.new(1, -20, 1, -20), "Out", "Quad", 0.5, true)
-    
     wait(3)
-    
     NotifFrame:TweenPosition(UDim2.new(1, 0, 1, 0), "In", "Quad", 0.5, true)
     wait(0.5)
     NotifGui:Destroy()
 end
 
 ShowNotification()
+warn("CONDA.CC loaded successfully! (Skeet Style)")
 
-warn("CONDA.CC loaded successfully! Set keybinds in RAGE/MACRO tabs")
-
--- Auto-update ESP for new players
 spawn(function()
     while wait(1) do
         for _, existingPlayer in pairs(Players:GetPlayers()) do
